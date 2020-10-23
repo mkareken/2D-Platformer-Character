@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 onready var SM = $StateMachine
-onready var Backup = get_node("/root/Game/Player_Container/Backup_Camera")
 
 var velocity = Vector2.ZERO
 var jump_power = Vector2.ZERO
@@ -28,9 +27,6 @@ func _physics_process(_delta):
 		
 	if direction < 0 and not $AnimatedSprite.flip_h: $AnimatedSprite.flip_h = true
 	if direction > 0 and $AnimatedSprite.flip_h: $AnimatedSprite.flip_h = false
-	Backup.position = position
-
-		
 
 func is_moving():
 	if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
@@ -51,6 +47,22 @@ func set_animation(anim):
 	if $AnimatedSprite.frames.has_animation(anim): $AnimatedSprite.play(anim)
 	else: $AnimatedSprite.play()
 
+func is_on_floor():
+	var fl = $Floor.get_children()
+	for f in fl:
+		if f.is_colliding():
+			return true
+	return false
+
+func is_on_right_wall():
+	if $Wall/Right.is_colliding():
+		return true
+	return false
+
+func is_on_left_wall():
+	if $Wall/Right.is_colliding():
+		return true
+	return false
+
 func die():
-	Backup.current = true
 	queue_free()
