@@ -13,22 +13,22 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 70 )
+region = Rect2( 224, 0, 32, 70 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 224, 70, 32, 70 )
+region = Rect2( 256, 0, 32, 70 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 256, 70, 32, 70 )
+region = Rect2( 288, 0, 32, 70 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 288, 70, 32, 70 )
+region = Rect2( 0, 0, 32, 70 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
@@ -63,28 +63,33 @@ region = Rect2( 192, 0, 32, 70 )
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 224, 0, 32, 70 )
+region = Rect2( 224, 70, 32, 70 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 256, 0, 32, 70 )
+region = Rect2( 256, 70, 32, 70 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 288, 0, 32, 70 )
+region = Rect2( 288, 70, 32, 70 )
 
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [  ],
 "loop": true,
-"name": "Idle",
+"name": "Attacking",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
 "loop": false,
-"name": "Falling",
+"name": "Jumping",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
@@ -94,7 +99,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": false,
-"name": "Jumping",
+"name": "Falling",
 "speed": 5.0
 } ]
 
@@ -107,7 +112,7 @@ script = ExtResource( 9 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 14 )
-animation = "Idle"
+animation = "Attacking"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -120,16 +125,19 @@ shape = SubResource( 15 )
 position = Vector2( -7, 26.125 )
 enabled = true
 cast_to = Vector2( 0, 5 )
+collision_mask = 30
 
 [node name="Center" type="RayCast2D" parent="Floor"]
 position = Vector2( -0.75, 26.125 )
 enabled = true
 cast_to = Vector2( 0, 5 )
+collision_mask = 30
 
 [node name="Right" type="RayCast2D" parent="Floor"]
 position = Vector2( 5.75, 26.125 )
 enabled = true
 cast_to = Vector2( 0, 5 )
+collision_mask = 2147483678
 
 [node name="Wall" type="Node2D" parent="."]
 
